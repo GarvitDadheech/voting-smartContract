@@ -104,4 +104,12 @@ contract votingSmartContract {
         return true;
     }
 
+    function voterList() public view returns(Voter[] memory) {
+        Voter[] memory temp = new Voter[](currVoterId - 1);
+        for(uint i = 1; i < currVoterId; i++) {
+            temp[i - 1] = voters[i];
+        }
+        return temp;
+    }
+
 }
