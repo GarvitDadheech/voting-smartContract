@@ -73,4 +73,12 @@ contract votingSmartContract {
         return true;
     }
 
+    function candidateList() public view isElectionOngoing() returns(Candidate[] memory) {
+        Candidate[] memory temp = new Candidate[](currCandidateId - 1);
+        for(uint i = 1; i < currCandidateId; i++) {
+            temp[i - 1] = candidates[i];
+        }
+        return temp;
+    }
+
 }
