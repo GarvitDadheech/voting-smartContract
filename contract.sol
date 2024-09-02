@@ -150,4 +150,8 @@ contract votingSmartContract {
         resultDeclared = true;
     }
 
+    function emergency() public isElectionComission() {
+        stopVoting = true;
+    }
+
 }
