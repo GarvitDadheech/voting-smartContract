@@ -138,4 +138,16 @@ contract votingSmartContract {
         }
     }
 
+    function result() external isElectionComission() {
+        require(!resultDeclared, "Result has already been declared!");
+        uint max = 0;
+        for(uint i = 1; i < currCandidateId; i++) {
+            if(candidates[i].totalVotes > max) {
+                max = candidates[i].totalVotes;
+                electionWinner = candidates[i].candidateAddress;
+            }
+        }
+        resultDeclared = true;
+    }
+
 }
