@@ -112,4 +112,14 @@ contract votingSmartContract {
         return temp;
     }
 
+    function vote(uint _candidateId) external isElectionOngoing() {
+        Voter storage voter = voters[currVoterId - 1];
+        require(voter.voterAddress == msg.sender, "You are not registered to vote!");
+        require(_candidateId > 0 && _candidateId < currCandidateId, "Candidate is not valid!");
+        require(voter.votedCandidateId == 0, "You have already voted!");
+        
+        voter.votedCandidateId = _candidateId;
+        candidates[_candidateId].totalVotes++;
+    }
+
 }
