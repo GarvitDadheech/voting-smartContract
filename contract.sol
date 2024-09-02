@@ -95,4 +95,13 @@ contract votingSmartContract {
         currVoterId++;
     }
 
+    function voterVerification(address _voterAddress) internal view returns(bool) {
+        for(uint i = 1; i < currVoterId; i++) {
+            if(voters[i].voterAddress == _voterAddress) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
