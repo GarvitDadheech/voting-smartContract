@@ -38,3 +38,15 @@ contract votingSmartContract {
     constructor() {
         electionComission = msg.sender;
     }
+
+    modifier isElectionComission() {
+        require(electionComission == msg.sender, "You are not election comission!");
+        _;
+    }
+
+    modifier isElectionOngoing() {
+        require(block.timestamp >= startTime && block.timestamp <= endTime && !stopVoting, "Voting is over or not started!");
+        _;
+    }
+    
+}
