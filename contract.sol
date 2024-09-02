@@ -81,4 +81,18 @@ contract votingSmartContract {
         return temp;
     }
 
+    function voterRegister(string calldata _name, string calldata _gender, uint _age) external isElectionOngoing() {
+        require(_age >= 18, "You are under 18 and not allowed to vote!");
+        require(voterVerification(msg.sender), "You have already registered as a voter!");
+        voters[currVoterId] = Voter({
+            name: _name,
+            gender: _gender,
+            age: _age,
+            voterAddress: msg.sender,
+            voterId: currVoterId,
+            votedCandidateId: 0
+        });
+        currVoterId++;
+    }
+
 }
