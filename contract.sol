@@ -122,4 +122,10 @@ contract votingSmartContract {
         candidates[_candidateId].totalVotes++;
     }
 
+    function voteTime(uint _startTime, uint duration) external isElectionComission() {
+        require(startTime == 0, "Voting time has already been set!");
+        startTime = _startTime;
+        endTime = _startTime + duration;
+    }
+
 }
