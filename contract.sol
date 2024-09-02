@@ -154,4 +154,21 @@ contract votingSmartContract {
         stopVoting = true;
     }
 
+    function resetElection() external isElectionComission() {
+        require(block.timestamp > endTime, "Cannot reset during an ongoing election!");
+        for(uint i = 1; i < currCandidateId; i++) {
+            delete candidates[i];
+        }
+        for(uint i = 1; i < currVoterId; i++) {
+            delete voters[i];
+        }
+        currVoterId = 1;
+        currCandidateId = 1;
+        startTime = 0;
+        endTime = 0;
+        stopVoting = false;
+        electionWinner = address(0);
+        resultDeclared = false;
+    }
+
 }
