@@ -128,4 +128,14 @@ contract votingSmartContract {
         endTime = _startTime + duration;
     }
 
+    function votingStatus() public view returns(string memory) {
+        if(startTime == 0) {
+            return "Voting has not started!";
+        } else if(block.timestamp <= endTime && !stopVoting) {
+            return "Voting has started!";
+        } else {
+            return "Voting has ended!";
+        }
+    }
+
 }
