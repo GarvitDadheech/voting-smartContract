@@ -48,5 +48,20 @@ contract votingSmartContract {
         require(block.timestamp >= startTime && block.timestamp <= endTime && !stopVoting, "Voting is over or not started!");
         _;
     }
-    
+
+    function candidateRegister(string calldata _name, string calldata _gender, uint _age, string calldata _party) external {
+        require(_age >= 18, "You are under 18 and not allowed for becoming a candidate");
+        require(candidateVerification(msg.sender), "You have already registered as a candidate!");
+        candidates[currCandidateId] = Candidate({
+            name: _name,
+            gender: _gender,
+            age: _age,
+            party: _party,
+            candidateId: currCandidateId,
+            candidateAddress: msg.sender,
+            totalVotes: 0
+        });
+        currCandidateId++;
+    }
+
 }
